@@ -31,6 +31,14 @@ export interface ApiError {
   statusCode: number;
 }
 
+export interface ApiEnvelope<T> {
+  erc: number;
+  msg: string;
+  total: number | null;
+  next: string | null;
+  data: T;
+}
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 /**
@@ -50,13 +58,23 @@ export async function interpretDocument(
       signal,
     });
 
+    const payload = (await response.json()) as ApiEnvelope<InterpretationResponse> | ApiError;
     if (!response.ok) {
-      const errorData = (await response.json()) as ApiError;
-      throw new Error(errorData.error || `API Error: ${response.statusCode}`);
+      if ('erc' in payload) {
+        throw new Error(payload.msg || `API Error: ${response.status}`);
+      }
+      throw new Error(payload.error || `API Error: ${response.status}`);
     }
 
-    const data = (await response.json()) as InterpretationResponse;
-    return data;
+    if ('erc' in payload && payload.erc !== 1) {
+      throw new Error(payload.msg || 'Failed to interpret document.');
+    }
+
+    if ('erc' in payload) {
+      return payload.data;
+    }
+
+    return payload as InterpretationResponse;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to interpret document: ${error.message}`);
@@ -86,13 +104,23 @@ export async function askQuestion(
       signal,
     });
 
+    const payload = (await response.json()) as ApiEnvelope<{ answer: string }> | ApiError;
     if (!response.ok) {
-      const errorData = (await response.json()) as ApiError;
-      throw new Error(errorData.error || `API Error: ${response.statusCode}`);
+      if ('erc' in payload) {
+        throw new Error(payload.msg || `API Error: ${response.status}`);
+      }
+      throw new Error(payload.error || `API Error: ${response.status}`);
     }
 
-    const data = (await response.json()) as { answer: string };
-    return data;
+    if ('erc' in payload && payload.erc !== 1) {
+      throw new Error(payload.msg || 'Failed to ask question.');
+    }
+
+    if ('erc' in payload) {
+      return payload.data;
+    }
+
+    return payload as { answer: string };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to ask question: ${error.message}`);

@@ -97,14 +97,23 @@ export function DocumentUpload({
   const startCamera = useCallback(async () => {
     try {
       setCameraError(null);
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        setCameraError('Camera access is not available in this browser.');
+        return;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
         audio: false,
       });
       streamRef.current = stream;
+      setCameraActive(true);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        setCameraActive(true);
+        try {
+          await videoRef.current.play();
+        } catch (playError) {
+          setCameraError('Unable to start the camera preview. Please allow camera permissions.');
+        }
       }
     } catch (err) {
       setCameraError(err instanceof Error ? err.message : 'Failed to access camera');
@@ -119,6 +128,15 @@ export function DocumentUpload({
     setCameraActive(false);
     setCameraError(null);
   }, []);
+
+  useEffect(() => {
+    if (cameraActive && videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      videoRef.current.play().catch(() => {
+        setCameraError('Unable to start the camera preview. Please allow camera permissions.');
+      });
+    }
+  }, [cameraActive]);
 
   const takePhoto = useCallback(() => {
     if (videoRef.current && canvasRef.current) {

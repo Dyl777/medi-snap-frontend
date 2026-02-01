@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Globe, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
@@ -44,6 +45,11 @@ const logoLetters = [
 export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="
@@ -78,7 +84,7 @@ export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
           <button
             type="button"
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            aria-label={mounted && isDark ? 'Switch to light theme' : 'Switch to dark theme'}
             className="
               inline-flex items-center justify-center
               h-9 w-9
@@ -90,8 +96,12 @@ export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
             "
           >
-            {isDark ? (
-              <Sun className="h-4 w-4" aria-hidden="true" />
+            {mounted ? (
+              isDark ? (
+                <Sun className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <Moon className="h-4 w-4" aria-hidden="true" />
+              )
             ) : (
               <Moon className="h-4 w-4" aria-hidden="true" />
             )}
