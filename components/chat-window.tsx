@@ -41,7 +41,7 @@ export function ChatWindow({
   const scrollRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const lastInterpretationId = useRef<string | undefined>();
+  const lastInterpretationId = useRef<string | undefined>(undefined);
 
   // Load chat history when component mounts or interpretationId changes
   useEffect(() => {
