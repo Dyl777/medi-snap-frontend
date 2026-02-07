@@ -47,8 +47,10 @@ export default function InterpretationPage() {
   }, [isAuthenticated, id]);
 
   const handleAskQuestion = useCallback(
-    async (question: string) => {
-      if (!results) return;
+    async (question: string): Promise<string> => {
+      if (!results) {
+        return 'No results available for chat';
+      }
 
       setAsking(true);
       try {
@@ -56,7 +58,7 @@ export default function InterpretationPage() {
         return response.answer;
       } catch (err) {
         console.error('Q&A Error:', err);
-        // You might want to show a toast here
+        return 'Sorry, I encountered an error. Please try again.';
       } finally {
         setAsking(false);
       }
