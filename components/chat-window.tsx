@@ -131,7 +131,7 @@ export function ChatWindow({
           responseText = response;
           console.log('[ChatWindow] Response is string:', responseText);
         } else if (response && typeof response === 'object' && 'answer' in response) {
-          responseText = String(response.answer || '');
+          responseText = String((response as { answer: string }).answer || '');
           console.log('[ChatWindow] Response has answer property:', responseText);
         } else if (response) {
           responseText = String(response);
