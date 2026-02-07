@@ -16,7 +16,14 @@ export function getGoogleAuthUrl(frontendRedirect: string) {
   const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI;
 
   if (!clientId || !redirectUri) {
-    throw new Error('Missing Google OAuth configuration.');
+    const missingKeys = [];
+    if (!clientId) missingKeys.push('NEXT_PUBLIC_GOOGLE_CLIENT_ID');
+    if (!redirectUri) missingKeys.push('NEXT_PUBLIC_GOOGLE_REDIRECT_URI');
+    
+    const errorMessage = `Missing Google OAuth configuration: ${missingKeys.join(', ')}`;
+    console.error(errorMessage);
+    console.warn('Google OAuth not configured. Please add the following environment variables:', missingKeys);
+    return '#'; // Return a safe fallback
   }
 
   const state = encodeState({
