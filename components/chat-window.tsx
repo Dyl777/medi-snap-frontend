@@ -45,10 +45,21 @@ export function ChatWindow({
 
   // Load chat history when component mounts or interpretationId changes
   useEffect(() => {
-    if (interpretationId && interpretationId !== lastInterpretationId.current) {
+    if (!interpretationId) {
+      console.log('[ChatWindow] No interpretationId provided');
+      return;
+    }
+
+    // Always reload history when interpretationId changes
+    if (interpretationId !== lastInterpretationId.current) {
+      console.log('[ChatWindow] InterpretationId changed from', lastInterpretationId.current, 'to', interpretationId);
       lastInterpretationId.current = interpretationId;
-      setHistoryLoaded(false); // Reset history loaded state for new interpretation
-      
+      setHistoryLoaded(false);
+      setMessages([]); // Clear messages immediately
+    }
+
+    // Load history if not already loaded for this interpretation
+    if (!historyLoaded) {
       const loadChatHistory = async () => {
         console.log('[ChatWindow] Loading chat history for:', interpretationId);
         setHistoryLoading(true);
@@ -75,7 +86,7 @@ export function ChatWindow({
 
       loadChatHistory();
     }
-  }, [interpretationId]); // Remove historyLoaded from dependencies
+  }, [interpretationId, historyLoaded]);
 
   // Auto-scroll to bottom only when new messages are added (not when scrolling up)
   const lastMessageCount = useRef(0);
