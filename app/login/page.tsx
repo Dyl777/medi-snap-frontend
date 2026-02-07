@@ -19,7 +19,6 @@ import { PageNav } from '@/components/page-nav';
 import { LogoWordmark } from '@/components/logo-wordmark';
 import { useAuth } from '@/lib/auth-context';
 import { loginUser } from '@/lib/api-client';
-import { getGoogleAuthUrl } from '@/lib/google-oauth';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -34,22 +33,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [language, setLanguage] = useState('en');
-  const handleGoogleSignIn = () => {
-    const redirect = `${window.location.origin}/auth/callback`;
-    const url = getGoogleAuthUrl(redirect);
-    if (url === '#') {
-      const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-      const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI;
-      const missing = [];
-      if (!clientId) missing.push('NEXT_PUBLIC_GOOGLE_CLIENT_ID');
-      if (!redirectUri) missing.push('NEXT_PUBLIC_GOOGLE_REDIRECT_URI');
-      alert(`Google sign-in is not configured. Missing: ${missing.join(', ')}. Please use email/password login.`);
-      return;
-    }
-    window.location.href = url;
-  };
-  
-  const isGoogleOAuthConfigured = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI;
+  // Google OAuth disabled
+  const isGoogleOAuthConfigured = false;
 
   useEffect(() => {
     const messageParam = searchParams.get('message');

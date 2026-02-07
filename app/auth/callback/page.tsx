@@ -17,11 +17,18 @@ export default function AuthCallbackPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const code = searchParams.get('code');
     const accessToken = searchParams.get('access_token');
     const errorParam = searchParams.get('error');
 
     if (errorParam) {
       setError(errorParam);
+      return;
+    }
+
+    // If we get a code instead of access_token, it means Google OAuth backend is not implemented
+    if (code && !accessToken) {
+      setError('Google OAuth backend is not fully configured. Please use email/password authentication.');
       return;
     }
 
