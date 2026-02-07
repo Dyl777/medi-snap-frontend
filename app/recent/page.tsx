@@ -60,10 +60,10 @@ export default function RecentResultsPage() {
   }, [isAuthenticated]);
 
   const handleAskQuestion = useCallback(
-    async (question: string) => {
+    async (question: string): Promise<string> => {
       if (!results) {
         console.error('No results available for chat');
-        return;
+        return 'No results available for chat';
       }
 
       console.log('Asking question:', question, 'for interpretation:', results.id);
@@ -74,7 +74,7 @@ export default function RecentResultsPage() {
         return response.answer;
       } catch (err) {
         console.error('Q&A Error:', err);
-        throw err;
+        return 'Sorry, I encountered an error. Please try again.';
       } finally {
         setAsking(false);
       }
