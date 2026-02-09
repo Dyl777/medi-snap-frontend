@@ -42,16 +42,22 @@ export default function RecentResultsPage() {
     if (isAuthenticated) {
       const fetchMostRecent = async () => {
         try {
+          console.log('[Recent] Fetching most recent interpretation');
+          console.log('[Recent] isAuthenticated:', isAuthenticated);
           setLoading(true);
           // Get the most recent interpretation (page 1, limit 1)
           const response = await getInterpretations({ page: 1, limit: 1 });
+          console.log('[Recent] Response:', response);
+          console.log('[Recent] Data count:', response.data?.length || 0);
           if (response.data && response.data.length > 0) {
+            console.log('[Recent] Setting results:', response.data[0]);
             setResults(response.data[0]);
           } else {
+            console.log('[Recent] No data found');
             setError(t('results.noRecentFound'));
           }
         } catch (err) {
-          console.error('Failed to fetch recent results:', err);
+          console.error('[Recent] Failed to fetch recent results:', err);
           setError('Failed to load recent results');
         } finally {
           setLoading(false);

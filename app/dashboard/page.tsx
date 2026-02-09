@@ -33,17 +33,22 @@ export default function DashboardPage() {
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
 
   const fetchData = useCallback(async () => {
+    console.log('[Dashboard] fetchData called');
+    console.log('[Dashboard] isAuthenticated:', isAuthenticated);
+    console.log('[Dashboard] user:', user);
     setLoading(true);
     try {
       const res = await getInterpretations({ search, type: typeFilter, page });
+      console.log('[Dashboard] Received data:', res);
+      console.log('[Dashboard] Data count:', res.data?.length || 0);
       setData(res.data);
       setPagination(res.pagination);
     } catch (error) {
-      console.error(error);
+      console.error('[Dashboard] Error fetching data:', error);
     } finally {
       setLoading(false);
     }
-  }, [search, typeFilter, page]);
+  }, [search, typeFilter, page, isAuthenticated, user]);
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {

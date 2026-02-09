@@ -241,11 +241,28 @@ export async function getInterpretations(params: { type?: string; search?: strin
   if (params.page) searchParams.append('page', params.page.toString());
   if (params.limit) searchParams.append('limit', params.limit.toString());
 
+  console.log('[API] getInterpretations called with params:', params);
+  console.log('[API] Auth token:', localStorage.getItem('auth_token') ? 'Present' : 'Missing');
+  console.log('[API] Request URL:', `${API_BASE_URL}/interpret?${searchParams.toString()}`);
+
   const response = await fetch(`${API_BASE_URL}/interpret?${searchParams.toString()}`, {
     headers: getHeaders(),
   });
-  if (!response.ok) throw new Error('Failed to fetch interpretations');
-  return response.json();
+  
+  console.log('[API] Response status:', response.status);
+  console.log('[API] Response ok:', response.ok);
+  
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('[API] Error response:', errorText);
+    throw new Error('Failed to fetch interpretations');
+  }
+  
+  const data = await response.json();
+  console.log('[API] Response data:', data);
+  console.log('[API] Data count:', data.data?.length || 0);
+  
+  return data;
 }
 
 export async function getInterpretation(id: string): Promise<InterpretationResponse> {
