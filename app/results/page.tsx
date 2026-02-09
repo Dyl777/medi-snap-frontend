@@ -125,21 +125,21 @@ export default function ResultsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>What you can do:</CardTitle>
+              <CardTitle>{t('results.whatYouCanDo')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button onClick={() => router.push('/upload')} className="w-full">
                 <FileText className="mr-2 h-4 w-4" />
-                Upload a New Document
+                {t('results.uploadNewDocument')}
               </Button>
               {isAuthenticated && (
                 <Button variant="outline" onClick={() => router.push('/dashboard')} className="w-full">
-                  View Your History
+                  {t('results.viewAllHistory')}
                 </Button>
               )}
               <Button variant="outline" onClick={() => router.push('/')} className="w-full">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Home
+                {t('results.backToHome')}
               </Button>
             </CardContent>
           </Card>
@@ -169,12 +169,12 @@ export default function ResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <FileText className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">Upload Another</h3>
+                <h3 className="font-medium">{t('results.uploadAnother')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Analyze a new medical document
+                  {t('results.analyzeNew')}
                 </p>
                 <Button onClick={handleNewDocument} size="sm" className="w-full">
-                  New Document
+                  {t('results.newDocument')}
                 </Button>
               </div>
             </CardContent>
@@ -184,12 +184,12 @@ export default function ResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <MessageCircle className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">Ask Questions</h3>
+                <h3 className="font-medium">{t('chat.title')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Get clarifications via chat
+                  {t('chat.subtitle')}
                 </p>
                 <Button variant="outline" size="sm" className="w-full" disabled>
-                  Available in Actions Tab
+                  {t('results.actions')}
                 </Button>
               </div>
             </CardContent>
@@ -199,9 +199,9 @@ export default function ResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <Download className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">Save Results</h3>
+                <h3 className="font-medium">{t('results.download')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Download as PDF or text
+                  {t('results.privacyMessage')}
                 </p>
                 {isAuthenticated ? (
                   <Button 
@@ -210,11 +210,11 @@ export default function ResultsPage() {
                     className="w-full"
                     onClick={() => router.push(`/interpret/${results.id}`)}
                   >
-                    View in Dashboard
+                    {t('dashboard.title')}
                   </Button>
                 ) : (
                   <Button variant="outline" size="sm" className="w-full" disabled>
-                    Login to Save
+                    {t('nav.login')}
                   </Button>
                 )}
               </div>
@@ -226,11 +226,11 @@ export default function ResultsPage() {
         <div className="flex justify-between">
           <Button variant="outline" onClick={() => router.push('/')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            {t('results.backToHome')}
           </Button>
           {isAuthenticated && (
             <Button variant="outline" onClick={() => router.push('/dashboard')}>
-              View All Results
+              {t('results.viewAllHistory')}
             </Button>
           )}
         </div>

@@ -30,7 +30,7 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
             <span className="h-2 w-2 rounded-full bg-destructive" />
           </div>
           <span className="text-xs sm:text-sm font-medium text-primary tracking-wide">
-            Powered by Advanced AI
+            {t('landing.hero.poweredByAI')}
           </span>
         </div>
 
@@ -80,33 +80,29 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
             {[
               {
                 icon: Brain,
-                title: 'AI-Powered',
-                description:
-                  'Advanced language models analyze your documents and surface the information that matters most, in terms you actually understand.',
+                titleKey: 'landing.features.aiPowered',
+                descKey: 'landing.features.aiPoweredDesc',
                 iconColor: 'text-primary',
                 iconBg: 'bg-primary/10',
               },
               {
                 icon: Lock,
-                title: 'Privacy First',
-                description:
-                  'Nothing is stored, logged, or shared. Your documents exist only in memory during processing and are wiped the moment you leave.',
+                titleKey: 'landing.features.privacyFirst',
+                descKey: 'landing.features.privacyFirstDesc',
                 iconColor: 'text-secondary',
                 iconBg: 'bg-secondary/10',
               },
               {
                 icon: Zap,
-                title: 'Instant Results',
-                description:
-                  'From upload to full interpretation in under five seconds. No waiting, no queues — just the answers you need, right away.',
+                titleKey: 'landing.features.instant',
+                descKey: 'landing.features.instantDesc',
                 iconColor: 'text-accent',
                 iconBg: 'bg-accent/20',
               },
               {
                 icon: Shield,
-                title: 'Fully Encrypted',
-                description:
-                  'End-to-end encryption on every request. Your data never touches our servers in plain text. Your documents, your control.',
+                titleKey: 'landing.features.encrypted',
+                descKey: 'landing.features.encryptedDesc',
                 iconColor: 'text-destructive',
                 iconBg: 'bg-destructive/10',
               },
@@ -130,10 +126,10 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
                   </div>
                   <div className="flex-1 pt-0.5">
                     <h3 className="font-semibold text-foreground text-base sm:text-lg">
-                      {feature.title}
+                      {t(feature.titleKey as any)}
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground mt-1.5 leading-relaxed">
-                      {feature.description}
+                      {t(feature.descKey as any)}
                     </p>
                   </div>
                 </div>
@@ -156,7 +152,7 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
             {t('landing.howItWorks.title')}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground text-center max-w-xl mx-auto mb-14 sm:mb-18">
-            Three simple steps to go from confusing medical jargon to clear, actionable information.
+            {t('landing.howItWorks.subtitle')}
           </p>
 
           <div className="relative">
@@ -214,29 +210,29 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
         <div className="max-w-3xl mx-auto">
 
           <h2 className="text-3xl sm:text-4xl font-normal text-foreground text-center tracking-[-0.02em] mb-3">
-            Common questions
+            {t('landing.faq.title')}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground text-center mb-12 sm:mb-16">
-            Everything you need to know before getting started.
+            {t('landing.faq.subtitle')}
           </p>
 
           <div className="grid gap-3 sm:grid-cols-2">
             {[
               {
-                q: 'What formats are supported?',
-                a: 'JPG, PNG, and PDF files up to 10 MB. We handle scanned documents and photos too.',
+                qKey: 'landing.faq.q1',
+                aKey: 'landing.faq.a1',
               },
               {
-                q: 'Is my data private?',
-                a: 'Completely. Documents are never stored or shared. Data is wiped immediately after processing.',
+                qKey: 'landing.faq.q2',
+                aKey: 'landing.faq.a2',
               },
               {
-                q: 'How accurate is this?',
-                a: 'Our AI achieves 92%+ accuracy on medical documents. We always recommend confirming with your doctor.',
+                qKey: 'landing.faq.q3',
+                aKey: 'landing.faq.a3',
               },
               {
-                q: 'Do I need an account?',
-                a: 'No account or registration required. Completely free to use, no strings attached.',
+                qKey: 'landing.faq.q4',
+                aKey: 'landing.faq.a4',
               },
             ].map((item, index) => (
               <Card
@@ -256,10 +252,10 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
                   <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <h3 className="font-semibold text-foreground text-sm sm:text-base">
-                      {item.q}
+                      {t(item.qKey as any)}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
-                      {item.a}
+                      {t(item.aKey as any)}
                     </p>
                   </div>
                 </div>
@@ -277,10 +273,10 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
       <div className="bg-muted/30 py-16 sm:py-24 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-4xl font-normal text-foreground tracking-[-0.02em] mb-4">
-            {t('landing.hero.title')}
+            {t('landing.cta.title')}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10">
-            {t('landing.hero.subtitle')}
+            {t('landing.cta.subtitle')}
           </p>
           <button
             onClick={onGetStarted}

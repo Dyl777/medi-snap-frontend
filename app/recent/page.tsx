@@ -38,38 +38,29 @@ export default function RecentResultsPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // COMMENTED OUT: Database fetching disabled
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     const fetchMostRecent = async () => {
-  //       try {
-  //         setLoading(true);
-  //         // Get the most recent interpretation (page 1, limit 1)
-  //         const response = await getInterpretations({ page: 1, limit: 1 });
-  //         if (response.data && response.data.length > 0) {
-  //           setResults(response.data[0]);
-  //         } else {
-  //           setError('No recent analyses found. Upload a document to get started.');
-  //         }
-  //       } catch (err) {
-  //         console.error('Failed to fetch recent results:', err);
-  //         setError('Failed to load recent results');
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  //
-  //     fetchMostRecent();
-  //   }
-  // }, [isAuthenticated]);
-
-  // Temporary: Set no results
   useEffect(() => {
     if (isAuthenticated) {
-      setLoading(false);
-      setError('No recent analyses found. Upload a document to get started.');
+      const fetchMostRecent = async () => {
+        try {
+          setLoading(true);
+          // Get the most recent interpretation (page 1, limit 1)
+          const response = await getInterpretations({ page: 1, limit: 1 });
+          if (response.data && response.data.length > 0) {
+            setResults(response.data[0]);
+          } else {
+            setError(t('results.noRecentFound'));
+          }
+        } catch (err) {
+          console.error('Failed to fetch recent results:', err);
+          setError('Failed to load recent results');
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchMostRecent();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, t]);
 
   const handleAskQuestion = useCallback(
     async (question: string): Promise<string> => {
@@ -125,19 +116,19 @@ export default function RecentResultsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>What you can do:</CardTitle>
+              <CardTitle>{t('results.whatYouCanDo')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button onClick={() => router.push('/upload')} className="w-full">
                 <Upload className="mr-2 h-4 w-4" />
-                Upload a New Document
+                {t('results.uploadNewDocument')}
               </Button>
               <Button variant="outline" onClick={() => router.push('/dashboard')} className="w-full">
-                View All History
+                {t('results.viewAllHistory')}
               </Button>
               <Button variant="outline" onClick={() => router.push('/')} className="w-full">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Home
+                {t('results.backToHome')}
               </Button>
             </CardContent>
           </Card>
@@ -167,12 +158,12 @@ export default function RecentResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <Upload className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">Upload Another</h3>
+                <h3 className="font-medium">{t('results.uploadAnother')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Analyze a new medical document
+                  {t('results.analyzeNew')}
                 </p>
                 <Button onClick={handleNewDocument} size="sm" className="w-full">
-                  New Document
+                  {t('results.newDocument')}
                 </Button>
               </div>
             </CardContent>
@@ -182,12 +173,12 @@ export default function RecentResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <FileText className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">View History</h3>
+                <h3 className="font-medium">{t('results.viewHistory')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  See all your past analyses
+                  {t('results.seeAllPast')}
                 </p>
                 <Button variant="outline" size="sm" className="w-full" onClick={() => router.push('/dashboard')}>
-                  View All Results
+                  {t('results.viewAllHistory')}
                 </Button>
               </div>
             </CardContent>
@@ -197,12 +188,12 @@ export default function RecentResultsPage() {
             <CardContent className="pt-6">
               <div className="text-center space-y-2">
                 <ArrowLeft className="h-8 w-8 text-primary mx-auto" />
-                <h3 className="font-medium">Back to Home</h3>
+                <h3 className="font-medium">{t('results.backToHome')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Return to the main page
+                  {t('results.returnToMain')}
                 </p>
                 <Button variant="outline" size="sm" className="w-full" onClick={() => router.push('/')}>
-                  Home
+                  {t('nav.home')}
                 </Button>
               </div>
             </CardContent>

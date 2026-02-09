@@ -103,15 +103,15 @@ export default function UploadPage() {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              <strong>Sign in required:</strong> You need to create an account to upload and analyze medical documents.
+              <strong>{t('upload.signInRequired')}:</strong> {t('upload.signInMessage')}
               <div className="flex gap-2 mt-3">
                 <Button size="sm" onClick={() => router.push('/register')}>
                   <UserPlus className="h-4 w-4 mr-1" />
-                  Sign Up
+                  {t('upload.signUp')}
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => router.push('/login')}>
                   <LogIn className="h-4 w-4 mr-1" />
-                  Sign In
+                  {t('upload.signIn')}
                 </Button>
               </div>
             </AlertDescription>
@@ -123,10 +123,10 @@ export default function UploadPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5" />
-              How It Works
+              {t('upload.howItWorks')}
             </CardTitle>
             <CardDescription>
-              Simple 3-step process to understand your medical documents
+              {t('upload.howItWorksDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -135,27 +135,27 @@ export default function UploadPage() {
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                   <Upload className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-medium">1. Upload</h3>
+                <h3 className="font-medium">{t('upload.step1')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Camera or file upload (JPG, PNG, PDF)
+                  {t('upload.step1Desc')}
                 </p>
               </div>
               <div className="text-center space-y-2">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                   <RefreshCw className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-medium">2. Process</h3>
+                <h3 className="font-medium">{t('upload.step2')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  AI analyzes in 2-5 seconds
+                  {t('upload.step2Desc')}
                 </p>
               </div>
               <div className="text-center space-y-2">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                   <FileText className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-medium">3. Understand</h3>
+                <h3 className="font-medium">{t('upload.step3')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Get plain language results
+                  {t('upload.step3Desc')}
                 </p>
               </div>
             </div>
@@ -166,9 +166,9 @@ export default function UploadPage() {
         {isAuthenticated && (
           <Card>
             <CardHeader>
-              <CardTitle>Upload Your Document</CardTitle>
+              <CardTitle>{t('upload.yourDocument')}</CardTitle>
               <CardDescription>
-                Supported formats: JPG, PNG, PDF (max 10MB)
+                {t('upload.supportedFormats')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

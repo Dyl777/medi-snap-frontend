@@ -32,26 +32,18 @@ export default function DashboardPage() {
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
 
-  // COMMENTED OUT: Database fetching disabled
-  // const fetchData = useCallback(async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await getInterpretations({ search, type: typeFilter, page });
-  //     setData(res.data);
-  //     setPagination(res.pagination);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, [search, typeFilter, page]);
-
-  // Temporary: Set empty data
-  useEffect(() => {
-    setLoading(false);
-    setData([]);
-    setPagination({ total: 0, pages: 1 });
-  }, []);
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await getInterpretations({ search, type: typeFilter, page });
+      setData(res.data);
+      setPagination(res.pagination);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [search, typeFilter, page]);
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -59,18 +51,17 @@ export default function DashboardPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // COMMENTED OUT: Database fetching disabled
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     fetchData();
-  //   }
-  // }, [isAuthenticated, fetchData]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchData();
+    }
+  }, [isAuthenticated, fetchData]);
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this interpretation?')) return;
     try {
       await deleteInterpretation(id);
-      //fetchData(); // Refresh
+      fetchData(); // Refresh
     } catch (error) {
       console.error('Delete failed', error);
     }
@@ -106,7 +97,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold">{t('dashboard.title')}</h1>
-            <p className="text-muted-foreground">Welcome back, {user?.full_name || user?.email}</p>
+            <p className="text-muted-foreground">{t('common.welcomeBack')}, {user?.full_name || user?.email}</p>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/recent">
@@ -160,11 +151,11 @@ export default function DashboardPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Summary</TableHead>
-                    <TableHead>Confidence</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead>{t('common.date')}</TableHead>
+                    <TableHead>{t('common.type')}</TableHead>
+                    <TableHead>{t('results.summary')}</TableHead>
+                    <TableHead>{t('results.confidence')}</TableHead>
+                    <TableHead className="text-right">{t('common.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -220,17 +211,17 @@ export default function DashboardPage() {
               disabled={page <= 1}
               onClick={() => setPage(p => p - 1)}
             >
-              Previous
+              {t('common.previous')}
             </Button>
             <span className="flex items-center px-4">
-              Page {page} of {pagination.pages}
+              {t('common.page')} {page} {t('common.of')} {pagination.pages}
             </span>
             <Button
               variant="outline"
               disabled={page >= pagination.pages}
               onClick={() => setPage(p => p + 1)}
             >
-              Next
+              {t('common.next')}
             </Button>
           </div>
         )}
