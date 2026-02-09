@@ -29,18 +29,26 @@ export default function DashboardPage() {
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
   const [language, setLanguage] = useState('en');
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await getInterpretations({ search, type: typeFilter, page });
-      setData(res.data);
-      setPagination(res.pagination);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [search, typeFilter, page]);
+  // COMMENTED OUT: Database fetching disabled
+  // const fetchData = useCallback(async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await getInterpretations({ search, type: typeFilter, page });
+  //     setData(res.data);
+  //     setPagination(res.pagination);
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [search, typeFilter, page]);
+
+  // Temporary: Set empty data
+  useEffect(() => {
+    setLoading(false);
+    setData([]);
+    setPagination({ total: 0, pages: 1 });
+  }, []);
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -48,11 +56,12 @@ export default function DashboardPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchData();
-    }
-  }, [isAuthenticated, fetchData]);
+  // COMMENTED OUT: Database fetching disabled
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     fetchData();
+  //   }
+  // }, [isAuthenticated, fetchData]);
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this interpretation?')) return;

@@ -35,27 +35,36 @@ export default function RecentResultsPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
+  // COMMENTED OUT: Database fetching disabled
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     const fetchMostRecent = async () => {
+  //       try {
+  //         setLoading(true);
+  //         // Get the most recent interpretation (page 1, limit 1)
+  //         const response = await getInterpretations({ page: 1, limit: 1 });
+  //         if (response.data && response.data.length > 0) {
+  //           setResults(response.data[0]);
+  //         } else {
+  //           setError('No recent analyses found. Upload a document to get started.');
+  //         }
+  //       } catch (err) {
+  //         console.error('Failed to fetch recent results:', err);
+  //         setError('Failed to load recent results');
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+  //
+  //     fetchMostRecent();
+  //   }
+  // }, [isAuthenticated]);
+
+  // Temporary: Set no results
   useEffect(() => {
     if (isAuthenticated) {
-      const fetchMostRecent = async () => {
-        try {
-          setLoading(true);
-          // Get the most recent interpretation (page 1, limit 1)
-          const response = await getInterpretations({ page: 1, limit: 1 });
-          if (response.data && response.data.length > 0) {
-            setResults(response.data[0]);
-          } else {
-            setError('No recent analyses found. Upload a document to get started.');
-          }
-        } catch (err) {
-          console.error('Failed to fetch recent results:', err);
-          setError('Failed to load recent results');
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchMostRecent();
+      setLoading(false);
+      setError('No recent analyses found. Upload a document to get started.');
     }
   }, [isAuthenticated]);
 
