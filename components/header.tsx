@@ -12,29 +12,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { LANGUAGES, useTranslation } from '@/lib/translations';
 import { LogoWordmark } from '@/components/logo-wordmark';
 
-interface HeaderProps {
-  language?: string;
-  onLanguageChange?: (lang: string) => void;
-}
-
-const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'es', name: 'Español' },
-  { code: 'fr', name: 'Français' },
-  { code: 'de', name: 'Deutsch' },
-  { code: 'it', name: 'Italiano' },
-  { code: 'pt', name: 'Português' },
-  { code: 'ja', name: '日本語' },
-  { code: 'zh', name: '中文' },
-  { code: 'ko', name: '한국어' },
-  { code: 'ar', name: 'العربية' },
-];
-
-export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
+export function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const { user, isAuthenticated, logout } = useAuth();
+  const { language, setLanguage } = useLanguage();
+  const { t } = useTranslation(language);
   const isDark = resolvedTheme === 'dark';
   const [mounted, setMounted] = useState(false);
 
@@ -117,10 +103,10 @@ export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
               py-1.5
             "
           >
-            {languages.map((lang) => (
+            {LANGUAGES.map((lang) => (
               <DropdownMenuItem
                 key={lang.code}
-                onClick={() => onLanguageChange?.(lang.code)}
+                onClick={() => setLanguage(lang.code)}
                 className={`
                   mx-1.5 px-3 py-2 rounded-lg cursor-pointer
                   text-sm transition-colors duration-100
@@ -130,7 +116,7 @@ export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
                   }
                 `}
               >
-                <span>{lang.name}</span>
+                <span>{lang.nativeName}</span>
                 {language === lang.code && (
                   <span className="ml-auto h-2 w-2 rounded-full bg-primary inline-block" aria-hidden="true" />
                 )}
@@ -187,20 +173,20 @@ export function Header({ language = 'en', onLanguageChange }: HeaderProps) {
                         hover:bg-muted/40 transition-colors
                       "
                     >
-                      Dashboard
+                      {t('nav.dashboard')}
                     </button>
                   </Link>
                 </div>
                 <div className="h-px bg-border my-2" />
                 <DropdownMenuItem onClick={logout} className="rounded-lg cursor-pointer text-destructive focus:text-destructive">
-                  Sign out
+                  {t('nav.logout')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <Link href="/login">
               <Button variant="ghost" size="sm" className="rounded-full">
-                Sign In
+                {t('nav.login')}
               </Button>
             </Link>
           )}

@@ -11,16 +11,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AlertCircle, ArrowLeft, FileText, Upload } from 'lucide-react';
 import { getInterpretations, askQuestion, InterpretationResponse } from '@/lib/api-client';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 export default function RecentResultsPage() {
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
 
   const [results, setResults] = useState<InterpretationResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [asking, setAsking] = useState(false);
-  const [language, setLanguage] = useState('en');
   const [defaultTab, setDefaultTab] = useState('summary');
 
   useEffect(() => {
@@ -98,10 +101,8 @@ export default function RecentResultsPage() {
   if (authLoading || loading) {
     return (
       <PageShell
-        title="Loading Recent Results"
+        title={t('common.loading')}
         description="Retrieving your most recent analysis..."
-        language={language}
-        onLanguageChange={setLanguage}
       >
         <LoadingState />
       </PageShell>
@@ -111,10 +112,8 @@ export default function RecentResultsPage() {
   if (error || !results) {
     return (
       <PageShell
-        title="Recent Results"
+        title={t('nav.recent')}
         description="Your most recent document analysis"
-        language={language}
-        onLanguageChange={setLanguage}
       >
         <div className="max-w-2xl mx-auto space-y-6">
           <Alert variant="destructive">
@@ -149,10 +148,8 @@ export default function RecentResultsPage() {
 
   return (
     <PageShell
-      title="Recent Results"
+      title={t('nav.recent')}
       description={`Your most recent analysis: ${results.document_type} (${Math.round(results.confidence * 100)}% confidence)`}
-      language={language}
-      onLanguageChange={setLanguage}
     >
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Results Display */}

@@ -16,10 +16,14 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { PageNav } from '@/components/page-nav';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 import { getInterpretations, deleteInterpretation, downloadExport, InterpretationResponse } from '@/lib/api-client';
 
 export default function DashboardPage() {
   const { user, isAuthenticated, isLoading: authLoading, logout } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const router = useRouter();
   const [data, setData] = useState<InterpretationResponse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +31,6 @@ export default function DashboardPage() {
   const [typeFilter, setTypeFilter] = useState('all');
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
-  const [language, setLanguage] = useState('en');
 
   // COMMENTED OUT: Database fetching disabled
   // const fetchData = useCallback(async () => {
@@ -84,7 +87,7 @@ export default function DashboardPage() {
   if (authLoading || !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background page-transition">
-        <Header language={language} onLanguageChange={setLanguage} />
+        <Header />
         <PageNav className="mt-2" />
         <main className="flex flex-1 items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
@@ -96,25 +99,25 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background page-transition">
-      <Header language={language} onLanguageChange={setLanguage} />
+      <Header />
       <PageNav className="mt-2" />
       <main className="flex-1 p-4 sm:p-8">
         <div className="mx-auto max-w-6xl space-y-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold">Analysis History</h1>
+            <h1 className="text-3xl font-bold">{t('dashboard.title')}</h1>
             <p className="text-muted-foreground">Welcome back, {user?.full_name || user?.email}</p>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/recent">
-              <Button variant="outline">Recent Results</Button>
+              <Button variant="outline">{t('nav.recent')}</Button>
             </Link>
             <Link href="/upload">
-              <Button variant="outline">New Analysis</Button>
+              <Button variant="outline">{t('nav.upload')}</Button>
             </Link>
             <Button variant="ghost" onClick={logout} className="text-destructive hover:text-destructive">
               <LogOut className="mr-2 h-4 w-4" />
-              Logout
+              {t('nav.logout')}
             </Button>
           </div>
         </div>
@@ -124,7 +127,7 @@ export default function DashboardPage() {
           <div className="relative flex-1">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search interpretations..."
+              placeholder={t('dashboard.search')}
               className="pl-8"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -132,10 +135,10 @@ export default function DashboardPage() {
           </div>
           <Select value={typeFilter} onValueChange={setTypeFilter}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter by Type" />
+              <SelectValue placeholder={t('dashboard.filter')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="all">{t('dashboard.all')}</SelectItem>
               <SelectItem value="Lab Results">Lab Results</SelectItem>
               <SelectItem value="Prescription">Prescription</SelectItem>
               <SelectItem value="Medical Report">Medical Report</SelectItem>
@@ -146,13 +149,13 @@ export default function DashboardPage() {
         {/* Table */}
         <Card>
           <CardHeader>
-            <CardTitle>Analysis History</CardTitle>
+            <CardTitle>{t('dashboard.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
               <div className="flex justify-center py-8"><Loader2 className="h-8 w-8 animate-spin" /></div>
             ) : data.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">No interpretations found.</div>
+              <div className="text-center py-8 text-muted-foreground">{t('dashboard.noResults')}</div>
             ) : (
               <Table>
                 <TableHeader>

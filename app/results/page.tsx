@@ -11,18 +11,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AlertCircle, ArrowLeft, FileText, MessageCircle, Download } from 'lucide-react';
 import { getInterpretation, askQuestion, InterpretationResponse } from '@/lib/api-client';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 export default function ResultsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const interpretationId = searchParams.get('id');
 
   const [results, setResults] = useState<InterpretationResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [asking, setAsking] = useState(false);
-  const [language, setLanguage] = useState('en');
   const [defaultTab, setDefaultTab] = useState('summary');
 
   useEffect(() => {
@@ -98,10 +101,8 @@ export default function ResultsPage() {
   if (loading) {
     return (
       <PageShell
-        title="Loading Results"
+        title={t('common.loading')}
         description="Retrieving your interpretation..."
-        language={language}
-        onLanguageChange={setLanguage}
       >
         <LoadingState />
       </PageShell>
@@ -111,10 +112,8 @@ export default function ResultsPage() {
   if (error || !results) {
     return (
       <PageShell
-        title="Results Not Found"
+        title={t('results.title')}
         description="Unable to load the interpretation results"
-        language={language}
-        onLanguageChange={setLanguage}
       >
         <div className="max-w-2xl mx-auto space-y-6">
           <Alert variant="destructive">
@@ -151,10 +150,8 @@ export default function ResultsPage() {
 
   return (
     <PageShell
-      title={`Results: ${results.document_type}`}
+      title={`${t('results.title')}: ${results.document_type}`}
       description={`Interpretation completed with ${Math.round(results.confidence * 100)}% confidence`}
-      language={language}
-      onLanguageChange={setLanguage}
     >
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Results Display */}

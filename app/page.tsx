@@ -11,7 +11,6 @@ import { useAuth } from '@/lib/auth-context';
 
 export default function Home() {
   const router = useRouter();
-  const [language, setLanguage] = useState('en');
   const { isAuthenticated, isLoading: authLoading } = useAuth();
 
   // Handle Get Started - redirect to login if not authenticated, upload if authenticated
@@ -33,7 +32,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background page-transition">
-      <Header language={language} onLanguageChange={setLanguage} />
+      <Header />
       <PageNav className="mt-2" />
 
       <main className="flex-1 mx-auto w-full max-w-4xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">

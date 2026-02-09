@@ -12,15 +12,18 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { AlertCircle, RefreshCw, FileText, Camera, Upload, UserPlus, LogIn } from 'lucide-react';
 import { interpretDocument, validateFile, InterpretationResponse } from '@/lib/api-client';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 export default function UploadPage() {
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [language, setLanguage] = useState('en');
   const [showSignupDialog, setShowSignupDialog] = useState(false);
 
   // Redirect unregistered users
@@ -81,10 +84,8 @@ export default function UploadPage() {
   if (loading) {
     return (
       <PageShell
-        title="Processing Your Document"
-        description="AI is analyzing your medical document..."
-        language={language}
-        onLanguageChange={setLanguage}
+        title={t('upload.analyzing')}
+        description={t('upload.analyzing')}
       >
         <LoadingState />
       </PageShell>
@@ -93,10 +94,8 @@ export default function UploadPage() {
 
   return (
     <PageShell
-      title="Upload Medical Document"
-      description="Upload your medical document to get a plain language translation"
-      language={language}
-      onLanguageChange={setLanguage}
+      title={t('upload.title')}
+      description={t('upload.subtitle')}
     >
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Authentication Check */}

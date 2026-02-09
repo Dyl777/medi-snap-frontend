@@ -2,12 +2,17 @@
 
 import { Shield, Zap, Lock, Brain, Check } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 interface LandingSectionProps {
   onGetStarted?: () => void;
 }
 
 export function LandingSection({ onGetStarted }: LandingSectionProps) {
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
+
   return (
     <section className="w-full">
 
@@ -32,16 +37,12 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
         {/* Headline — Google uses LIGHT weight (400), very large, tight tracking.
             This is the #1 signature of Google's typography. */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-normal text-foreground leading-[1.1] tracking-[-0.03em] max-w-3xl mx-auto">
-          Understand your
-          <br />
-          <span className="text-primary">medical</span>{' '}
-          <span className="text-secondary">documents</span>
+          {t('landing.hero.title')}
         </h1>
 
         {/* Subheading — Google uses 18–20px, muted, regular weight */}
         <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed font-normal">
-          Translate complex medical jargon into plain language instantly.
-          Your privacy is our priority — nothing is ever stored.
+          {t('landing.hero.subtitle')}
         </p>
 
         {/* ── Google CTA Button ──
@@ -62,7 +63,7 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
             "
           >
-            Get Started
+            {t('landing.hero.cta')}
           </button>
         </div>
       </div>
@@ -152,7 +153,7 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
         <div className="max-w-4xl mx-auto">
 
           <h2 className="text-3xl sm:text-4xl font-normal text-foreground text-center tracking-[-0.02em] mb-4">
-            How it works
+            {t('landing.howItWorks.title')}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground text-center max-w-xl mx-auto mb-14 sm:mb-18">
             Three simple steps to go from confusing medical jargon to clear, actionable information.
@@ -166,23 +167,23 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
               {[
                 {
                   step: '01',
-                  title: 'Upload',
-                  description: 'Take a photo or upload a PDF, JPG, or PNG of your medical document.',
-                  color: 'text-destructive',       // Red
+                  title: t('landing.howItWorks.step1'),
+                  description: t('landing.howItWorks.step1Desc'),
+                  color: 'text-destructive',
                   bg: 'bg-destructive/10',
                 },
                 {
                   step: '02',
-                  title: 'Analyze',
-                  description: 'Our AI extracts key information, identifies medical terms, and interprets them.',
-                  color: 'text-accent',            // Yellow — use darker variant for text
+                  title: t('landing.howItWorks.step2'),
+                  description: t('landing.howItWorks.step2Desc'),
+                  color: 'text-accent',
                   bg: 'bg-accent/15',
                 },
                 {
                   step: '03',
-                  title: 'Understand',
-                  description: 'Receive a plain-language breakdown with warnings, definitions, and next steps.',
-                  color: 'text-secondary',         // Green
+                  title: t('landing.howItWorks.step3'),
+                  description: t('landing.howItWorks.step3Desc'),
+                  color: 'text-secondary',
                   bg: 'bg-secondary/10',
                 },
               ].map((item, index) => (
@@ -276,12 +277,10 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
       <div className="bg-muted/30 py-16 sm:py-24 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl sm:text-4xl font-normal text-foreground tracking-[-0.02em] mb-4">
-            Ready to understand your
-            <br />
-            <span className="text-primary">medical documents</span>?
+            {t('landing.hero.title')}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10">
-            No sign-up needed. Just upload and go.
+            {t('landing.hero.subtitle')}
           </p>
           <button
             onClick={onGetStarted}
@@ -297,7 +296,7 @@ export function LandingSection({ onGetStarted }: LandingSectionProps) {
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
             "
           >
-            Get Started
+            {t('landing.hero.cta')}
           </button>
         </div>
       </div>

@@ -1,15 +1,19 @@
 'use client';
 
 import { LogoWordmark } from '@/components/logo-wordmark';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 const footerLinks = [
-  { label: 'Privacy Policy', href: '#privacy' },
-  { label: 'Terms of Service', href: '#terms' },
-  { label: 'Contact Support', href: '#contact' },
+  { label: 'footer.privacy', href: '#privacy' },
+  { label: 'footer.terms', href: '#terms' },
+  { label: 'footer.contact', href: '#contact' },
 ];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
 
   return (
     <footer className="border-t border-border bg-background">
@@ -39,7 +43,7 @@ export function Footer() {
                   transition-colors duration-150
                 "
               >
-                {link.label}
+                {t(link.label as any)}
               </a>
             ))}
           </nav>
@@ -56,9 +60,7 @@ export function Footer() {
         <div className="border-t border-border pt-5 pb-6 sm:pb-8">
           <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto text-center">
             <span className="font-medium text-foreground">Disclaimer:</span>{' '}
-            Med8d provides general medical information only and is not a substitute
-            for professional medical advice. Always consult your healthcare provider
-            for medical concerns.
+            {t('footer.disclaimer')}
           </p>
         </div>
 

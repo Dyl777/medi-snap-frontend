@@ -7,6 +7,8 @@ import { ResultsDisplay } from '@/components/results-display';
 import { LoadingState } from '@/components/loading-state';
 import { getInterpretation, askQuestion, InterpretationResponse } from '@/lib/api-client';
 import { useAuth } from '@/lib/auth-context';
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 import { Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -14,13 +16,14 @@ export default function InterpretationPage() {
   const params = useParams();
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const id = params.id as string;
 
   const [results, setResults] = useState<InterpretationResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [asking, setAsking] = useState(false);
-  const [language, setLanguage] = useState('en');
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -69,10 +72,8 @@ export default function InterpretationPage() {
   if (authLoading || (loading && !results && !error)) {
     return (
       <PageShell
-        title="Loading Interpretation"
+        title={t('common.loading')}
         description="Retrieving your analysis..."
-        language={language}
-        onLanguageChange={setLanguage}
       >
         <LoadingState />
       </PageShell>
@@ -81,7 +82,7 @@ export default function InterpretationPage() {
 
   if (error) {
     return (
-      <PageShell title="Error" description="Could not load interpretation" language={language} onLanguageChange={setLanguage}>
+      <PageShell title={t('common.error')} description="Could not load interpretation">
         <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -101,8 +102,6 @@ export default function InterpretationPage() {
     <PageShell
       title={results?.document_type || 'Interpretation Results'}
       description={`Analysis from ${results?.created_at ? new Date(results.created_at).toLocaleDateString() : 'recent upload'}`}
-      language={language}
-      onLanguageChange={setLanguage}
     >
       {results && (
         <ResultsDisplay
