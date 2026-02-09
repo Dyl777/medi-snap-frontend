@@ -25,6 +25,7 @@ export default function RecentResultsPage() {
   const [error, setError] = useState<string | null>(null);
   const [asking, setAsking] = useState(false);
   const [defaultTab, setDefaultTab] = useState('summary');
+  const [hasFetched, setHasFetched] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash === '#chat') {
@@ -40,6 +41,9 @@ export default function RecentResultsPage() {
   }, [authLoading, isAuthenticated, router]);
 
   useEffect(() => {
+    // Only run once when auth is ready
+    if (hasFetched) return;
+    
     // Wait for auth to finish loading
     if (authLoading) {
       console.log('[Recent] Auth still loading, waiting...');
@@ -70,17 +74,19 @@ export default function RecentResultsPage() {
           setError(t('results.noRecentFound'));
           setResults(null);
         }
+        setHasFetched(true);
       } catch (err) {
         console.error('[Recent] Failed to fetch recent results:', err);
         setError(err instanceof Error ? err.message : 'Failed to load recent results');
         setResults(null);
+        setHasFetched(true);
       } finally {
         setLoading(false);
       }
     };
 
     fetchMostRecent();
-  }, [isAuthenticated, authLoading, router, t]);
+  }, [isAuthenticated, authLoading, router, t, hasFetched]);
 
   const handleAskQuestion = useCallback(
     async (question: string): Promise<string> => {
