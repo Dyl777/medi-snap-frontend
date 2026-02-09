@@ -156,6 +156,30 @@ type TranslationKeys = {
   'dashboard.prescription': string;
   'dashboard.medicalReport': string;
   
+  // Loading/Workflow
+  'loading.processing': string;
+  'loading.processingDesc': string;
+  'loading.usuallyTakes': string;
+  'loading.workflowTitle': string;
+  'loading.workflowDesc': string;
+  'loading.howItWorks': string;
+  'loading.followSteps': string;
+  'loading.step1Title': string;
+  'loading.step1Desc': string;
+  'loading.step2Title': string;
+  'loading.step2Desc': string;
+  'loading.step3Title': string;
+  'loading.step3Desc': string;
+  'loading.step4Title': string;
+  'loading.step4Desc': string;
+  'loading.step5Title': string;
+  'loading.step5Desc': string;
+  'loading.readyToStart': string;
+  'loading.uploadDocument': string;
+  'loading.viewResults': string;
+  'loading.signInToUpload': string;
+  'loading.learningWorkflow': string;
+  
   // Footer
   'footer.tagline': string;
   'footer.disclaimer': string;
@@ -368,7 +392,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Browse files',
     'upload.openCamera': 'Open camera',
     'upload.privacyFirst': 'Privacy First:',
-    'upload.privacyMessage': 'Your documents are processed securely and never stored. Results are automatically deleted when you close the browser',
+    'upload.privacyMessage': 'Your documents are processed securely with end-to-end encryption. Self-host the entire application for complete data sovereignty',
     'upload.backToHome': 'Back to Home',
     'upload.recentResults': 'Recent Results',
     'upload.viewHistory': 'View History',
@@ -399,6 +423,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Lab Results',
     'dashboard.prescription': 'Prescription',
     'dashboard.medicalReport': 'Medical Report',
+    
+    // Loading/Workflow
+    'loading.processing': 'Processing Your Document',
+    'loading.processingDesc': 'AI is analyzing your medical document...',
+    'loading.usuallyTakes': 'This usually takes 2-5 seconds...',
+    'loading.workflowTitle': 'Med8d Workflow',
+    'loading.workflowDesc': 'Understanding how Med8d transforms medical documents',
+    'loading.howItWorks': 'How Med8d Works',
+    'loading.followSteps': 'Follow these steps to translate your medical documents into plain language',
+    'loading.step1Title': 'Document Upload',
+    'loading.step1Desc': 'Camera or file upload (JPG, PNG, PDF)',
+    'loading.step2Title': 'AI Processing',
+    'loading.step2Desc': 'Document analysis (2-5 seconds)',
+    'loading.step3Title': 'View Results',
+    'loading.step3Desc': '5 tabs: Summary, Details, Terms, Actions, Chat',
+    'loading.step4Title': 'Ask Questions',
+    'loading.step4Desc': 'Optional chat for clarifications',
+    'loading.step5Title': 'Save & Export',
+    'loading.step5Desc': 'Download or save to history',
+    'loading.readyToStart': 'Ready to get started?',
+    'loading.uploadDocument': 'Upload Document',
+    'loading.viewResults': 'View Results',
+    'loading.signInToUpload': 'Sign In to Upload',
+    'loading.learningWorkflow': 'Learning the workflow...',
   },
   
   es: {
@@ -559,7 +607,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Buscar archivos',
     'upload.openCamera': 'Abrir cámara',
     'upload.privacyFirst': 'Privacidad Primero:',
-    'upload.privacyMessage': 'Tus documentos se procesan de forma segura y nunca se almacenan. Los resultados se eliminan automáticamente cuando cierras el navegador',
+    'upload.privacyMessage': 'Tus documentos se procesan de forma segura con encriptación de extremo a extremo. Auto-aloja toda la aplicación para soberanía completa de datos',
     'upload.backToHome': 'Volver al Inicio',
     'upload.recentResults': 'Resultados Recientes',
     'upload.viewHistory': 'Ver Historial',
@@ -586,6 +634,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Resultados de Laboratorio',
     'dashboard.prescription': 'Receta',
     'dashboard.medicalReport': 'Informe Médico',
+    
+    // Loading/Workflow
+    'loading.processing': 'Procesando Tu Documento',
+    'loading.processingDesc': 'La IA está analizando tu documento médico...',
+    'loading.usuallyTakes': 'Esto generalmente toma 2-5 segundos...',
+    'loading.workflowTitle': 'Flujo de Trabajo de Med8d',
+    'loading.workflowDesc': 'Entendiendo cómo Med8d transforma documentos médicos',
+    'loading.howItWorks': 'Cómo Funciona Med8d',
+    'loading.followSteps': 'Sigue estos pasos para traducir tus documentos médicos a lenguaje sencillo',
+    'loading.step1Title': 'Subir Documento',
+    'loading.step1Desc': 'Cámara o carga de archivo (JPG, PNG, PDF)',
+    'loading.step2Title': 'Procesamiento IA',
+    'loading.step2Desc': 'Análisis del documento (2-5 segundos)',
+    'loading.step3Title': 'Ver Resultados',
+    'loading.step3Desc': '5 pestañas: Resumen, Detalles, Términos, Acciones, Chat',
+    'loading.step4Title': 'Hacer Preguntas',
+    'loading.step4Desc': 'Chat opcional para aclaraciones',
+    'loading.step5Title': 'Guardar y Exportar',
+    'loading.step5Desc': 'Descargar o guardar en el historial',
+    'loading.readyToStart': '¿Listo para comenzar?',
+    'loading.uploadDocument': 'Subir Documento',
+    'loading.viewResults': 'Ver Resultados',
+    'loading.signInToUpload': 'Iniciar Sesión para Subir',
+    'loading.learningWorkflow': 'Aprendiendo el flujo de trabajo...',
   },
   
   // Add other languages (fr, de, it, pt, ar, zh, ja, hi) with similar structure
@@ -732,7 +804,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Parcourir les fichiers',
     'upload.openCamera': 'Ouvrir l\'appareil photo',
     'upload.privacyFirst': 'Confidentialité d\'Abord:',
-    'upload.privacyMessage': 'Vos documents sont traités en toute sécurité et jamais stockés. Les résultats sont automatiquement supprimés lorsque vous fermez le navigateur',
+    'upload.privacyMessage': 'Vos documents sont traités en toute sécurité avec un chiffrement de bout en bout. Auto-hébergez l\'application entière pour une souveraineté complète des données',
     'upload.backToHome': 'Retour à l\'Accueil',
     'upload.recentResults': 'Résultats Récents',
     'upload.viewHistory': 'Voir l\'Historique',
@@ -759,6 +831,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Résultats de Laboratoire',
     'dashboard.prescription': 'Ordonnance',
     'dashboard.medicalReport': 'Rapport Médical',
+    
+    // Loading/Workflow
+    'loading.processing': 'Traitement de Votre Document',
+    'loading.processingDesc': 'L\'IA analyse votre document médical...',
+    'loading.usuallyTakes': 'Cela prend généralement 2-5 secondes...',
+    'loading.workflowTitle': 'Flux de Travail Med8d',
+    'loading.workflowDesc': 'Comprendre comment Med8d transforme les documents médicaux',
+    'loading.howItWorks': 'Comment Fonctionne Med8d',
+    'loading.followSteps': 'Suivez ces étapes pour traduire vos documents médicaux en langage simple',
+    'loading.step1Title': 'Téléchargement de Document',
+    'loading.step1Desc': 'Appareil photo ou téléchargement de fichier (JPG, PNG, PDF)',
+    'loading.step2Title': 'Traitement IA',
+    'loading.step2Desc': 'Analyse du document (2-5 secondes)',
+    'loading.step3Title': 'Voir les Résultats',
+    'loading.step3Desc': '5 onglets: Résumé, Détails, Termes, Actions, Chat',
+    'loading.step4Title': 'Poser des Questions',
+    'loading.step4Desc': 'Chat optionnel pour des clarifications',
+    'loading.step5Title': 'Sauvegarder et Exporter',
+    'loading.step5Desc': 'Télécharger ou sauvegarder dans l\'historique',
+    'loading.readyToStart': 'Prêt à commencer?',
+    'loading.uploadDocument': 'Télécharger un Document',
+    'loading.viewResults': 'Voir les Résultats',
+    'loading.signInToUpload': 'Se Connecter pour Télécharger',
+    'loading.learningWorkflow': 'Apprentissage du flux de travail...',
   },
   
   // German translations
@@ -903,7 +999,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Dateien durchsuchen',
     'upload.openCamera': 'Kamera öffnen',
     'upload.privacyFirst': 'Datenschutz Zuerst:',
-    'upload.privacyMessage': 'Ihre Dokumente werden sicher verarbeitet und niemals gespeichert. Ergebnisse werden automatisch gelöscht, wenn Sie den Browser schließen',
+    'upload.privacyMessage': 'Ihre Dokumente werden sicher mit Ende-zu-Ende-Verschlüsselung verarbeitet. Hosten Sie die gesamte Anwendung selbst für vollständige Datensouveränität',
     'upload.backToHome': 'Zurück zur Startseite',
     'upload.recentResults': 'Aktuelle Ergebnisse',
     'upload.viewHistory': 'Verlauf anzeigen',
@@ -930,6 +1026,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Laborergebnisse',
     'dashboard.prescription': 'Rezept',
     'dashboard.medicalReport': 'Medizinischer Bericht',
+    
+    // Loading/Workflow
+    'loading.processing': 'Verarbeitung Ihres Dokuments',
+    'loading.processingDesc': 'KI analysiert Ihr medizinisches Dokument...',
+    'loading.usuallyTakes': 'Dies dauert normalerweise 2-5 Sekunden...',
+    'loading.workflowTitle': 'Med8d Arbeitsablauf',
+    'loading.workflowDesc': 'Verstehen, wie Med8d medizinische Dokumente transformiert',
+    'loading.howItWorks': 'Wie Med8d Funktioniert',
+    'loading.followSteps': 'Folgen Sie diesen Schritten, um Ihre medizinischen Dokumente in einfache Sprache zu übersetzen',
+    'loading.step1Title': 'Dokument Hochladen',
+    'loading.step1Desc': 'Kamera oder Datei-Upload (JPG, PNG, PDF)',
+    'loading.step2Title': 'KI-Verarbeitung',
+    'loading.step2Desc': 'Dokumentanalyse (2-5 Sekunden)',
+    'loading.step3Title': 'Ergebnisse Anzeigen',
+    'loading.step3Desc': '5 Tabs: Zusammenfassung, Details, Begriffe, Aktionen, Chat',
+    'loading.step4Title': 'Fragen Stellen',
+    'loading.step4Desc': 'Optionaler Chat für Klarstellungen',
+    'loading.step5Title': 'Speichern & Exportieren',
+    'loading.step5Desc': 'Herunterladen oder im Verlauf speichern',
+    'loading.readyToStart': 'Bereit anzufangen?',
+    'loading.uploadDocument': 'Dokument Hochladen',
+    'loading.viewResults': 'Ergebnisse Anzeigen',
+    'loading.signInToUpload': 'Anmelden zum Hochladen',
+    'loading.learningWorkflow': 'Arbeitsablauf lernen...',
   },
   
   // Italian translations
@@ -1074,7 +1194,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Sfoglia file',
     'upload.openCamera': 'Apri fotocamera',
     'upload.privacyFirst': 'Privacy Prima di Tutto:',
-    'upload.privacyMessage': 'I tuoi documenti vengono elaborati in modo sicuro e mai memorizzati. I risultati vengono eliminati automaticamente quando chiudi il browser',
+    'upload.privacyMessage': 'I tuoi documenti vengono elaborati in modo sicuro con crittografia end-to-end. Auto-ospita l\'intera applicazione per la sovranità completa dei dati',
     'upload.backToHome': 'Torna alla Home',
     'upload.recentResults': 'Risultati Recenti',
     'upload.viewHistory': 'Visualizza Cronologia',
@@ -1101,6 +1221,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Risultati di Laboratorio',
     'dashboard.prescription': 'Prescrizione',
     'dashboard.medicalReport': 'Referto Medico',
+    
+    // Loading/Workflow
+    'loading.processing': 'Elaborazione del Tuo Documento',
+    'loading.processingDesc': 'L\'IA sta analizzando il tuo documento medico...',
+    'loading.usuallyTakes': 'Questo richiede solitamente 2-5 secondi...',
+    'loading.workflowTitle': 'Flusso di Lavoro Med8d',
+    'loading.workflowDesc': 'Capire come Med8d trasforma i documenti medici',
+    'loading.howItWorks': 'Come Funziona Med8d',
+    'loading.followSteps': 'Segui questi passaggi per tradurre i tuoi documenti medici in linguaggio semplice',
+    'loading.step1Title': 'Caricamento Documento',
+    'loading.step1Desc': 'Fotocamera o caricamento file (JPG, PNG, PDF)',
+    'loading.step2Title': 'Elaborazione IA',
+    'loading.step2Desc': 'Analisi del documento (2-5 secondi)',
+    'loading.step3Title': 'Visualizza Risultati',
+    'loading.step3Desc': '5 schede: Riepilogo, Dettagli, Termini, Azioni, Chat',
+    'loading.step4Title': 'Fai Domande',
+    'loading.step4Desc': 'Chat opzionale per chiarimenti',
+    'loading.step5Title': 'Salva ed Esporta',
+    'loading.step5Desc': 'Scarica o salva nella cronologia',
+    'loading.readyToStart': 'Pronto per iniziare?',
+    'loading.uploadDocument': 'Carica Documento',
+    'loading.viewResults': 'Visualizza Risultati',
+    'loading.signInToUpload': 'Accedi per Caricare',
+    'loading.learningWorkflow': 'Apprendimento del flusso di lavoro...',
   },
   
   // Portuguese translations
@@ -1245,7 +1389,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'Procurar arquivos',
     'upload.openCamera': 'Abrir câmera',
     'upload.privacyFirst': 'Privacidade em Primeiro Lugar:',
-    'upload.privacyMessage': 'Seus documentos são processados com segurança e nunca armazenados. Os resultados são automaticamente excluídos quando você fecha o navegador',
+    'upload.privacyMessage': 'Seus documentos são processados com segurança com criptografia de ponta a ponta. Auto-hospede toda a aplicação para soberania completa de dados',
     'upload.backToHome': 'Voltar ao Início',
     'upload.recentResults': 'Resultados Recentes',
     'upload.viewHistory': 'Ver Histórico',
@@ -1272,6 +1416,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'Resultados de Laboratório',
     'dashboard.prescription': 'Prescrição',
     'dashboard.medicalReport': 'Relatório Médico',
+    
+    // Loading/Workflow
+    'loading.processing': 'Processando Seu Documento',
+    'loading.processingDesc': 'A IA está analisando seu documento médico...',
+    'loading.usuallyTakes': 'Isso geralmente leva 2-5 segundos...',
+    'loading.workflowTitle': 'Fluxo de Trabalho Med8d',
+    'loading.workflowDesc': 'Entendendo como o Med8d transforma documentos médicos',
+    'loading.howItWorks': 'Como o Med8d Funciona',
+    'loading.followSteps': 'Siga estes passos para traduzir seus documentos médicos em linguagem simples',
+    'loading.step1Title': 'Carregamento de Documento',
+    'loading.step1Desc': 'Câmera ou upload de arquivo (JPG, PNG, PDF)',
+    'loading.step2Title': 'Processamento IA',
+    'loading.step2Desc': 'Análise do documento (2-5 segundos)',
+    'loading.step3Title': 'Ver Resultados',
+    'loading.step3Desc': '5 abas: Resumo, Detalhes, Termos, Ações, Chat',
+    'loading.step4Title': 'Fazer Perguntas',
+    'loading.step4Desc': 'Chat opcional para esclarecimentos',
+    'loading.step5Title': 'Salvar e Exportar',
+    'loading.step5Desc': 'Baixar ou salvar no histórico',
+    'loading.readyToStart': 'Pronto para começar?',
+    'loading.uploadDocument': 'Carregar Documento',
+    'loading.viewResults': 'Ver Resultados',
+    'loading.signInToUpload': 'Entrar para Carregar',
+    'loading.learningWorkflow': 'Aprendendo o fluxo de trabalho...',
   },
   
   // Arabic translations (RTL language)
@@ -1416,7 +1584,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'تصفح الملفات',
     'upload.openCamera': 'فتح الكاميرا',
     'upload.privacyFirst': 'الخصوصية أولاً:',
-    'upload.privacyMessage': 'تتم معالجة مستنداتك بشكل آمن ولا يتم تخزينها أبدًا. يتم حذف النتائج تلقائيًا عند إغلاق المتصفح',
+    'upload.privacyMessage': 'تتم معالجة مستنداتك بشكل آمن مع التشفير من طرف إلى طرف. استضف التطبيق بالكامل للحصول على سيادة كاملة للبيانات',
     'upload.backToHome': 'العودة إلى الصفحة الرئيسية',
     'upload.recentResults': 'النتائج الأخيرة',
     'upload.viewHistory': 'عرض السجل',
@@ -1443,6 +1611,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'نتائج المختبر',
     'dashboard.prescription': 'وصفة طبية',
     'dashboard.medicalReport': 'تقرير طبي',
+    
+    // Loading/Workflow
+    'loading.processing': 'معالجة مستندك',
+    'loading.processingDesc': 'الذكاء الاصطناعي يحلل مستندك الطبي...',
+    'loading.usuallyTakes': 'هذا يستغرق عادة 2-5 ثوانٍ...',
+    'loading.workflowTitle': 'سير عمل Med8d',
+    'loading.workflowDesc': 'فهم كيف يحول Med8d المستندات الطبية',
+    'loading.howItWorks': 'كيف يعمل Med8d',
+    'loading.followSteps': 'اتبع هذه الخطوات لترجمة مستنداتك الطبية إلى لغة بسيطة',
+    'loading.step1Title': 'رفع المستند',
+    'loading.step1Desc': 'الكاميرا أو تحميل الملف (JPG، PNG، PDF)',
+    'loading.step2Title': 'معالجة الذكاء الاصطناعي',
+    'loading.step2Desc': 'تحليل المستند (2-5 ثوانٍ)',
+    'loading.step3Title': 'عرض النتائج',
+    'loading.step3Desc': '5 علامات تبويب: ملخص، تفاصيل، مصطلحات، إجراءات، دردشة',
+    'loading.step4Title': 'طرح الأسئلة',
+    'loading.step4Desc': 'دردشة اختيارية للتوضيحات',
+    'loading.step5Title': 'حفظ وتصدير',
+    'loading.step5Desc': 'تنزيل أو حفظ في السجل',
+    'loading.readyToStart': 'هل أنت مستعد للبدء؟',
+    'loading.uploadDocument': 'رفع مستند',
+    'loading.viewResults': 'عرض النتائج',
+    'loading.signInToUpload': 'تسجيل الدخول للرفع',
+    'loading.learningWorkflow': 'تعلم سير العمل...',
   },
   
   // Chinese translations (Simplified)
@@ -1587,7 +1779,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': '浏览文件',
     'upload.openCamera': '打开相机',
     'upload.privacyFirst': '隐私优先：',
-    'upload.privacyMessage': '您的文档经过安全处理，永不存储。关闭浏览器时结果会自动删除',
+    'upload.privacyMessage': '您的文档通过端到端加密安全处理。自托管整个应用程序以获得完全的数据主权',
     'upload.backToHome': '返回首页',
     'upload.recentResults': '最近结果',
     'upload.viewHistory': '查看历史',
@@ -1614,6 +1806,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': '实验室结果',
     'dashboard.prescription': '处方',
     'dashboard.medicalReport': '医疗报告',
+    
+    // Loading/Workflow
+    'loading.processing': '处理您的文档',
+    'loading.processingDesc': 'AI正在分析您的医疗文档...',
+    'loading.usuallyTakes': '这通常需要2-5秒...',
+    'loading.workflowTitle': 'Med8d工作流程',
+    'loading.workflowDesc': '了解Med8d如何转换医疗文档',
+    'loading.howItWorks': 'Med8d如何工作',
+    'loading.followSteps': '按照这些步骤将您的医疗文档翻译成简单语言',
+    'loading.step1Title': '文档上传',
+    'loading.step1Desc': '相机或文件上传（JPG、PNG、PDF）',
+    'loading.step2Title': 'AI处理',
+    'loading.step2Desc': '文档分析（2-5秒）',
+    'loading.step3Title': '查看结果',
+    'loading.step3Desc': '5个标签：摘要、详情、术语、操作、聊天',
+    'loading.step4Title': '提问',
+    'loading.step4Desc': '可选聊天以获取说明',
+    'loading.step5Title': '保存和导出',
+    'loading.step5Desc': '下载或保存到历史记录',
+    'loading.readyToStart': '准备开始了吗？',
+    'loading.uploadDocument': '上传文档',
+    'loading.viewResults': '查看结果',
+    'loading.signInToUpload': '登录以上传',
+    'loading.learningWorkflow': '学习工作流程...',
   },
   
   // Japanese translations
@@ -1758,7 +1974,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'ファイルを参照',
     'upload.openCamera': 'カメラを開く',
     'upload.privacyFirst': 'プライバシー第一：',
-    'upload.privacyMessage': '文書は安全に処理され、保存されません。ブラウザを閉じると結果は自動的に削除されます',
+    'upload.privacyMessage': '文書はエンドツーエンド暗号化で安全に処理されます。完全なデータ主権のためにアプリケーション全体をセルフホストできます',
     'upload.backToHome': 'ホームに戻る',
     'upload.recentResults': '最近の結果',
     'upload.viewHistory': '履歴を表示',
@@ -1785,6 +2001,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': '検査結果',
     'dashboard.prescription': '処方箋',
     'dashboard.medicalReport': '医療レポート',
+    
+    // Loading/Workflow
+    'loading.processing': '文書を処理中',
+    'loading.processingDesc': 'AIが医療文書を分析しています...',
+    'loading.usuallyTakes': '通常2〜5秒かかります...',
+    'loading.workflowTitle': 'Med8dワークフロー',
+    'loading.workflowDesc': 'Med8dが医療文書をどのように変換するかを理解する',
+    'loading.howItWorks': 'Med8dの仕組み',
+    'loading.followSteps': '医療文書を簡単な言葉に翻訳するには、次の手順に従ってください',
+    'loading.step1Title': '文書アップロード',
+    'loading.step1Desc': 'カメラまたはファイルアップロード（JPG、PNG、PDF）',
+    'loading.step2Title': 'AI処理',
+    'loading.step2Desc': '文書分析（2〜5秒）',
+    'loading.step3Title': '結果を表示',
+    'loading.step3Desc': '5つのタブ：概要、詳細、用語、アクション、チャット',
+    'loading.step4Title': '質問する',
+    'loading.step4Desc': '説明のためのオプションのチャット',
+    'loading.step5Title': '保存とエクスポート',
+    'loading.step5Desc': 'ダウンロードまたは履歴に保存',
+    'loading.readyToStart': '始める準備はできましたか？',
+    'loading.uploadDocument': '文書をアップロード',
+    'loading.viewResults': '結果を表示',
+    'loading.signInToUpload': 'アップロードするにはログイン',
+    'loading.learningWorkflow': 'ワークフローを学習中...',
   },
   
   // Hindi translations
@@ -1929,7 +2169,7 @@ export const translations: Record<Language, TranslationKeys> = {
     'upload.browseFiles': 'फ़ाइलें ब्राउज़ करें',
     'upload.openCamera': 'कैमरा खोलें',
     'upload.privacyFirst': 'गोपनीयता पहले:',
-    'upload.privacyMessage': 'आपके दस्तावेज़ सुरक्षित रूप से संसाधित किए जाते हैं और कभी संग्रहीत नहीं किए जाते। ब्राउज़र बंद करने पर परिणाम स्वचालित रूप से हटा दिए जाते हैं',
+    'upload.privacyMessage': 'आपके दस्तावेज़ एंड-टू-एंड एन्क्रिप्शन के साथ सुरक्षित रूप से संसाधित किए जाते हैं। पूर्ण डेटा संप्रभुता के लिए पूरे एप्लिकेशन को स्व-होस्ट करें',
     'upload.backToHome': 'होम पर वापस जाएं',
     'upload.recentResults': 'हाल के परिणाम',
     'upload.viewHistory': 'इतिहास देखें',
@@ -1956,6 +2196,30 @@ export const translations: Record<Language, TranslationKeys> = {
     'dashboard.labResults': 'प्रयोगशाला परिणाम',
     'dashboard.prescription': 'नुस्खा',
     'dashboard.medicalReport': 'चिकित्सा रिपोर्ट',
+    
+    // Loading/Workflow
+    'loading.processing': 'आपके दस्तावेज़ को संसाधित किया जा रहा है',
+    'loading.processingDesc': 'AI आपके चिकित्सा दस्तावेज़ का विश्लेषण कर रहा है...',
+    'loading.usuallyTakes': 'इसमें आमतौर पर 2-5 सेकंड लगते हैं...',
+    'loading.workflowTitle': 'Med8d वर्कफ़्लो',
+    'loading.workflowDesc': 'समझें कि Med8d चिकित्सा दस्तावेज़ों को कैसे रूपांतरित करता है',
+    'loading.howItWorks': 'Med8d कैसे काम करता है',
+    'loading.followSteps': 'अपने चिकित्सा दस्तावेज़ों को सरल भाषा में अनुवाद करने के लिए इन चरणों का पालन करें',
+    'loading.step1Title': 'दस्तावेज़ अपलोड',
+    'loading.step1Desc': 'कैमरा या फ़ाइल अपलोड (JPG, PNG, PDF)',
+    'loading.step2Title': 'AI प्रसंस्करण',
+    'loading.step2Desc': 'दस्तावेज़ विश्लेषण (2-5 सेकंड)',
+    'loading.step3Title': 'परिणाम देखें',
+    'loading.step3Desc': '5 टैब: सारांश, विवरण, शर्तें, कार्रवाई, चैट',
+    'loading.step4Title': 'प्रश्न पूछें',
+    'loading.step4Desc': 'स्पष्टीकरण के लिए वैकल्पिक चैट',
+    'loading.step5Title': 'सहेजें और निर्यात करें',
+    'loading.step5Desc': 'डाउनलोड करें या इतिहास में सहेजें',
+    'loading.readyToStart': 'शुरू करने के लिए तैयार हैं?',
+    'loading.uploadDocument': 'दस्तावेज़ अपलोड करें',
+    'loading.viewResults': 'परिणाम देखें',
+    'loading.signInToUpload': 'अपलोड करने के लिए साइन इन करें',
+    'loading.learningWorkflow': 'वर्कफ़्लो सीख रहे हैं...',
   },
 };
 

@@ -8,25 +8,29 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, Circle, ArrowRight, FileText, Brain, MessageCircle, Download } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
-
-const workflowSteps = [
-  { id: 1, title: 'Document Upload', description: 'Camera or file upload (JPG, PNG, PDF)', icon: FileText },
-  { id: 2, title: 'AI Processing', description: 'Document analysis (2-5 seconds)', icon: Brain },
-  { id: 3, title: 'View Results', description: '5 tabs: Summary, Details, Terms, Actions, Chat', icon: FileText },
-  { id: 4, title: 'Ask Questions', description: 'Optional chat for clarifications', icon: MessageCircle },
-  { id: 5, title: 'Save & Export', description: 'Download or save to history', icon: Download },
-];
+import { useLanguage } from '@/lib/language-context';
+import { useTranslation } from '@/lib/translations';
 
 export default function LoadingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated } = useAuth();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const [currentStep, setCurrentStep] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
 
   // Check if we're in processing mode (has file data) or just showing workflow
   const isProcessing = searchParams.get('processing') === 'true';
   const resultId = searchParams.get('resultId');
+
+  const workflowSteps = [
+    { id: 1, title: t('loading.step1Title'), description: t('loading.step1Desc'), icon: FileText },
+    { id: 2, title: t('loading.step2Title'), description: t('loading.step2Desc'), icon: Brain },
+    { id: 3, title: t('loading.step3Title'), description: t('loading.step3Desc'), icon: FileText },
+    { id: 4, title: t('loading.step4Title'), description: t('loading.step4Desc'), icon: MessageCircle },
+    { id: 5, title: t('loading.step5Title'), description: t('loading.step5Desc'), icon: Download },
+  ];
 
   useEffect(() => {
     if (isProcessing) {
@@ -66,14 +70,14 @@ export default function LoadingPage() {
   if (isProcessing) {
     return (
       <PageShell
-        title="Processing Your Document"
-        description="AI is analyzing your medical document..."
+        title={t('loading.processing')}
+        description={t('loading.processingDesc')}
       >
         <div className="max-w-2xl mx-auto space-y-6">
           <LoadingState />
           <div className="text-center">
             <p className="text-sm text-muted-foreground">
-              This usually takes 2-5 seconds...
+              {t('loading.usuallyTakes')}
             </p>
           </div>
         </div>
@@ -83,15 +87,15 @@ export default function LoadingPage() {
 
   return (
     <PageShell
-      title="Med8d Workflow"
-      description="Understanding how Med8d transforms medical documents"
+      title={t('loading.workflowTitle')}
+      description={t('loading.workflowDesc')}
     >
       <div className="max-w-2xl mx-auto space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>How Med8d Works</CardTitle>
+            <CardTitle>{t('loading.howItWorks')}</CardTitle>
             <CardDescription>
-              Follow these steps to translate your medical documents into plain language
+              {t('loading.followSteps')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -128,26 +132,26 @@ export default function LoadingPage() {
 
         {currentStep >= workflowSteps.length - 1 ? (
           <div className="text-center space-y-4">
-            <p className="text-sm text-muted-foreground">Ready to get started?</p>
+            <p className="text-sm text-muted-foreground">{t('loading.readyToStart')}</p>
             <div className="flex gap-2 justify-center">
               {isAuthenticated ? (
                 <>
                   <Button onClick={() => router.push('/upload')} className="flex-1 max-w-xs">
-                    Upload Document
+                    {t('loading.uploadDocument')}
                   </Button>
                   {resultId && (
                     <Button onClick={() => router.push('/recent')} variant="outline" className="flex-1 max-w-xs">
-                      View Results
+                      {t('loading.viewResults')}
                     </Button>
                   )}
                 </>
               ) : (
                 <Button onClick={() => router.push('/login')} className="flex-1 max-w-xs">
-                  Sign In to Upload
+                  {t('loading.signInToUpload')}
                 </Button>
               )}
               <Button onClick={() => router.push('/')} variant="outline" className="flex-1 max-w-xs">
-                Back to Home
+                {t('results.backToHome')}
               </Button>
             </div>
           </div>
@@ -155,7 +159,7 @@ export default function LoadingPage() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              Learning the workflow...
+              {t('loading.learningWorkflow')}
             </div>
           </div>
         )}

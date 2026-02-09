@@ -223,8 +223,7 @@ export default function UploadPage() {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            <strong>Privacy First:</strong> Your documents are processed securely and never stored. 
-            Results are automatically deleted when you close the browser.
+            <strong>{t('upload.privacyFirst')}</strong> {t('upload.privacyMessage')}
           </AlertDescription>
         </Alert>
 
