@@ -34,39 +34,60 @@ export default function RecentResultsPage() {
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
+      console.log('[Recent] Not authenticated, redirecting...');
       router.push('/login?message=Please sign in to view your results');
     }
   }, [authLoading, isAuthenticated, router]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      const fetchMostRecent = async () => {
-        try {
-          console.log('[Recent] Fetching most recent interpretation');
-          console.log('[Recent] isAuthenticated:', isAuthenticated);
-          setLoading(true);
-          // Get the most recent interpretation (page 1, limit 1)
-          const response = await getInterpretations({ page: 1, limit: 1 });
-          console.log('[Recent] Response:', response);
-          console.log('[Recent] Data count:', response.data?.length || 0);
-          if (response.data && response.data.length > 0) {
-            console.log('[Recent] Setting results:', response.data[0]);
-            setResults(response.data[0]);
-          } else {
-            console.log('[Recent] No data found');
-            setError(t('results.noRecentFound'));
-          }
-        } catch (err) {
-          console.error('[Recent] Failed to fetch recent results:', err);
-          setError('Failed to load recent results');
-        } finally {
-          setLoading(false);
+    const fetchMostRecent = async () => {
+      try {
+        console.log('[Recent] Fetching most recent interpretation');
+        console.log('[Recent] isAuthenticated:', isAuthenticated);
+        console.log('[Recent] authLoading:', authLoading);
+        
+        // Wait for auth to finish loading
+        if (authLoading) {
+          console.log('[Recent] Auth still loading, waiting...');
+          return;
         }
-      };
+        
+        // Redirect if not authenticated
+        if (!isAuthenticated) {
+          console.log('[Recent] Not authenticated, redirecting to login');
+          router.push('/login?message=Please sign in to view your results');
+          return;
+        }
+        
+        setLoading(true);
+        setError(null);
+        
+        // Get the most recent interpretation (page 1, limit 1)
+        console.log('[Recent] Calling getInterpretations API...');
+        const response = await getInterpretations({ page: 1, limit: 1 });
+        console.log('[Recent] Response:', response);
+        console.log('[Recent] Data count:', response.data?.length || 0);
+        
+        if (response.data && response.data.length > 0) {
+          console.log('[Recent] Setting results:', response.data[0]);
+          setResults(response.data[0]);
+          setError(null);
+        } else {
+          console.log('[Recent] No data found in response');
+          setError(t('results.noRecentFound'));
+          setResults(null);
+        }
+      } catch (err) {
+        console.error('[Recent] Failed to fetch recent results:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load recent results');
+        setResults(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchMostRecent();
-    }
-  }, [isAuthenticated, t]);
+    fetchMostRecent();
+  }, [isAuthenticated, authLoading, router, t]);
 
   const handleAskQuestion = useCallback(
     async (question: string): Promise<string> => {
@@ -116,13 +137,17 @@ export default function RecentResultsPage() {
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              {error || 'No recent results found.'}
+              {error || t('results.noRecentFound')}
             </AlertDescription>
           </Alert>
 
           <Card>
             <CardHeader>
               <CardTitle>{t('results.whatYouCanDo')}</CardTitle>
+              <CardDescription>
+                {!results && !error && 'You haven\'t uploaded any documents yet.'}
+                {error && 'There was an issue loading your recent results.'}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button onClick={() => router.push('/upload')} className="w-full">
@@ -130,6 +155,7 @@ export default function RecentResultsPage() {
                 {t('results.uploadNewDocument')}
               </Button>
               <Button variant="outline" onClick={() => router.push('/dashboard')} className="w-full">
+                <FileText className="mr-2 h-4 w-4" />
                 {t('results.viewAllHistory')}
               </Button>
               <Button variant="outline" onClick={() => router.push('/')} className="w-full">
