@@ -67,7 +67,7 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to delete this interpretation?')) return;
     try {
       await deleteInterpretation(id);
-      fetchData(); // Refresh
+      //fetchData(); // Refresh
     } catch (error) {
       console.error('Delete failed', error);
     }
